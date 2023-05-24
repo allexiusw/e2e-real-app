@@ -9,14 +9,15 @@ describe('Real Wordl app tests', () => {
 
     it('Create a Bank Account', () => {
         cy.get('.MuiTypography-root').contains('Bank Accounts').click();
-        cy.get('.MuiButton-label').contains('Create').click();
-        cy.get('#bankaccount-bankName-input').clear().type('111111');
+        cy.get('a[data-test="bankaccount-new"] span').contains('Create').click({force: true});
+        cy.get('#bankaccount-bankName-input').clear().type('Bank of America');
         cy.get('#bankaccount-routingNumber-input').clear().type('111111111');
         cy.get('#bankaccount-accountNumber-input').clear().type('111111111');
         cy.get(".MuiButton-label").contains('Save').click();
+        cy.get('ul[data-test="bankaccount-list"] > li').should('contain', 'Bank of America');
     });
 
-    // afterEach(() => {
-    //     cy.get('span.MuiTypography-root').contains('Logout').click();
-    // });
+    afterEach(() => {
+        cy.get('span.MuiTypography-root').contains('Logout').click();
+    });
 });
