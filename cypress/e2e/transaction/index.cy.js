@@ -1,5 +1,5 @@
 /// <reference types="cypress" />
-import { transaction } from '../../page-objects/pages';
+import { transaction } from '../../page-objects/pages/transaction';
 
 describe('Transaction', () => {
     const customerName = 'Arely Kertzmann';

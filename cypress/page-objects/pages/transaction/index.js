@@ -1,6 +1,5 @@
 export class Transaction {
     constructor(){
-        this.path = '/transaction';
         this.elements = {
             getNewBtn: () => cy.get('a').contains('New'),
             getSearchBar: () => cy.get('#user-list-search-input'),
