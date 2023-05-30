@@ -20,13 +20,14 @@ describe('BankAccount', () => {
         const accountName = `Bank of America ${Cypress._.random(0, 1e6)}`;
         bankAccount.new(accountName, accountNumber, routingNumber);
         bankAccount.matchers.getSuccessMsg().contains(accountName).should('be.visible');
+        bankAccount.elements.getListAccountItem().contains(accountName).parents('li').find('button').click();
     });
 
     it('delete with valida data', () => {
         const accountName = `Bank of America ${Cypress._.random(0, 1e6)}`;
         bankAccount.new(accountName, accountNumber, routingNumber);
         bankAccount.elements.getBankAccountBtn().click();
-        cy.get('ul[data-test="bankaccount-list"] li p').contains(accountName).parents('li').find('button').click();
+        bankAccount.elements.getListAccountItem().contains(accountName).parents('li').find('button').click();
         bankAccount.matchers.getSuccessMsg().contains(`${accountName} (Deleted)`).should('be.visible');
     });
 
