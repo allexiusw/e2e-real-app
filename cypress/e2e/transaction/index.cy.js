@@ -1,5 +1,6 @@
 /// <reference types="cypress" />
 import { transaction } from '../../page-objects/pages/transaction';
+import { user } from '../../page-objects/pages/user';
 
 describe('Transaction', () => {
     const customerName = 'Arely Kertzmann';
@@ -9,20 +10,18 @@ describe('Transaction', () => {
     const password = 's3cret';
 
     beforeEach(()=> {
-        cy.visit('/');
-        cy.get('#username').clear().type(username);
-        cy.get('#password').clear().type(password);
-        cy.get('.MuiButton-label').click();
-        cy.get('h6[data-test="sidenav-username"]').should('contain', `@${username}`);
+        user.login(username, password);
+        user.matchers.getSuccessMsg().should('contain', `@${username}`);
     });
     
     afterEach(()=> {
-        cy.get('span.MuiTypography-root').contains('Logout').click();
+        user.logout();
     });
 
     it('creates a new pay request', () => {
         transaction.new(customerName, transactionAmount, transactionNote);
         transaction.matchers.getSuccessMsg()
             .should('have.text', `${customerName}Paid $${transactionAmount}.00 for ${transactionNote}`);
+        transaction
     });
 });
