@@ -1,5 +1,3 @@
-import { transaction } from "../../page-objects/pages/transaction";
-
 describe('Real Wordl app tests', () => {
     
     // get uuid random string
