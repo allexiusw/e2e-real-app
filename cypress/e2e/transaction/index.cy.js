@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
-import { transaction } from '../../page-objects/pages/transaction';
+import { transaction } from '../../page-objects/pages';
 
-describe('Real World app tests', () => {
+describe('Transaction', () => {
     const customerName = 'Arely Kertzmann';
     const transactionAmount = 100;
     const transactionNote = 'testing';
@@ -20,7 +20,7 @@ describe('Real World app tests', () => {
         cy.get('span.MuiTypography-root').contains('Logout').click();
     });
 
-    it('Creates a new pay request', () => {
+    it('creates a new pay request', () => {
         transaction.new(customerName, transactionAmount, transactionNote);
         transaction.matchers.getSuccessMsg()
             .should('have.text', `${customerName}Paid $${transactionAmount}.00 for ${transactionNote}`);

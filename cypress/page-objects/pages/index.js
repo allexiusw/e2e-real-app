@@ -1,4 +1,4 @@
-export class Transaction{
+export class Transaction {
     constructor(){
         this.path = '/transaction';
         this.elements = {
@@ -23,7 +23,7 @@ export class Transaction{
         this.elements.getAmountTxt().clear().type(amount);
         this.elements.getNoteTxt().clear().type(note);
         this.elements.getPayBtn().click();
-      }
+    }
 }
 
 export const transaction = new Transaction();
