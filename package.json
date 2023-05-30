@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "e2e": "cypress open"
+    "e2e": "cypress open",
+    "test": "cypress run"
   },
   "keywords": [
     "automation",
