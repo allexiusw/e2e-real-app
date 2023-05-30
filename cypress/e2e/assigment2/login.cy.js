@@ -6,13 +6,15 @@ describe('Real Wordl app tests', () => {
     const accountName = `Bank of America ${Cypress._.random(0, 1e6)}`;
     const accountNumber = '111111111';
     const routingNumber = '111111111';
+    const username = 'Katharina_Bernier';
+    const password = 's3cret';
 
     beforeEach(()=> {
         cy.visit('/');
-        cy.get('#username').clear().type('Katharina_Bernier');
-        cy.get('#password').clear().type('s3cret');
+        cy.get('#username').clear().type(username);
+        cy.get('#password').clear().type(password);
         cy.get('.MuiButton-label').click();
-        cy.get('h6[data-test="sidenav-username"]').should('contain', '@Katharina_Bernier');
+        cy.get('h6[data-test="sidenav-username"]').should('contain', `@${username}`);
     });
 
     it('should create a Bank Account', () => {
