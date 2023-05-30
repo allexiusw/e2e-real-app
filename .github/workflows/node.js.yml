@@ -26,5 +26,23 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
+    
+    - name: Clone Cypress RealWorld App
+      run: git clone https://github.com/cypress-io/cypress-realworld-app
+
+    - name: Install Dependencies Cypress RealWorld App
+      run: npm install
+      working-directory: cypress-realworld-app
+
+    - name: Build and Start Project Cypress RealWorld App
+      run: npm run start &
+      working-directory: cypress-realworld-app
+    
+    - name: Wait for Port 3000 to be Available
+      run: |
+        while ! nc -z localhost 3000; do
+          sleep 1
+        done
+  
     - run: yarn install
     - run: yarn run test
