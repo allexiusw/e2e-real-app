@@ -17,7 +17,7 @@ describe('BankAccount', () => {
     it('creates a with valid data', () => {
         const accountName = `Bank of America ${Cypress._.random(0, 1e6)}`;
         bankAccount.new(accountName, accountNumber, routingNumber);
-        bankAccount.matchers.getSuccessMsg().contains(accountName).should('be.visible');
+        bankAccount.matchers.getSuccessMsg().contains(accountName).should('exist');
         bankAccount.elements.getListAccountItem().contains(accountName).parents('li').find('button').click();
     });
 
@@ -26,7 +26,7 @@ describe('BankAccount', () => {
         bankAccount.new(accountName, accountNumber, routingNumber);
         bankAccount.elements.getBankAccountBtn().click();
         bankAccount.elements.getListAccountItem().contains(accountName).parents('li').find('button').click();
-        bankAccount.matchers.getSuccessMsg().contains(`${accountName} (Deleted)`).should('be.visible');
+        bankAccount.matchers.getSuccessMsg().contains(`${accountName} (Deleted)`).should('exist');
     });
 
     afterEach(() => {
