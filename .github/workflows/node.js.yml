@@ -43,12 +43,12 @@ jobs:
     - name: Build and Start Project Cypress RealWorld App
       run: yarn run dev &
       working-directory: cypress-realworld-app
-  
-    - name: Wait for Port 3000 to be Available
+
+    - name: Wait for App to Start
       run: |
-        while ! nc -z localhost 3000; do
-          sleep 1
-        done
+        curl -sLO https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh
+        chmod +x wait-for-it.sh
+        ./wait-for-it.sh localhost:3000 -t 60 -- echo "App is running!"
 
     - name : Run tests
       run: yarn run test
