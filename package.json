@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "e2e": "cypress open",
-    "test": "cypress run --headless --browser chrome --disable-gpu"
+    "test": "cypress run --headless --browser chrome"
   },
   "keywords": [
     "automation",
