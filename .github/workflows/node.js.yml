@@ -44,5 +44,14 @@ jobs:
           sleep 1
         done
 
-    - run: yarn install
-    - run: yarn run test
+    - name: Install Install deps
+      run: yarn install
+
+    - name: Download the build folders
+      uses: actions/download-artifact@v3
+      with:
+        name: Artifacts Cypress RealWorld App
+        path: cypress/videos
+
+    - name : Run tests
+      run: yarn run test
