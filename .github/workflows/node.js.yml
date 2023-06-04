@@ -49,9 +49,7 @@ jobs:
         curl -sLO https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh
         chmod +x wait-for-it.sh
         ./wait-for-it.sh localhost:3000 -t 60 -- echo "App is running!"
-
-    - name : Run tests
-      run: yarn run test
+        yarn run test
     
     - name: Download the build folders
       if: ${{ failure() }}  # Run the step only if there was a failure
