@@ -7,4 +7,6 @@ module.exports = defineConfig({
     },
     baseUrl: "http://localhost:3000",
   },
+  chromeWebSecurity: false,
+  chromeArgs: ['--disable-gpu'],
 });
