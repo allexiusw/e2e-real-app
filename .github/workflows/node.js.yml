@@ -55,4 +55,4 @@ jobs:
       uses: actions/download-artifact@v3
       with:
         name: Artifacts Cypress RealWorld App
-        path: cypress/videos
+        path: e2e-real-app/cypress/videos/
