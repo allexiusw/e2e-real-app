@@ -52,7 +52,7 @@ jobs:
     
     - name: Download the build folders
       if: ${{ failure() }}  # Run the step only if there was a failure
-      uses: actions/download-artifact@v3
+      uses: actions/upload-artifact@v2
       with:
-        name: Artifacts Cypress RealWorld App
-        path: e2e-real-app/cypress/videos/
+        name: cypress-videos
+        path: cypress/videos

@@ -6,7 +6,7 @@ module.exports = defineConfig({
       // implement node event listeners here
     },
     baseUrl: "http://localhost:3000",
+    chromeWebSecurity: false,
+    chromeArgs: ['--disable-gpu'],
   },
-  chromeWebSecurity: false,
-  chromeArgs: ['--disable-gpu'],
 });
