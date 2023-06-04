@@ -34,21 +34,21 @@ jobs:
       run: yarn install
       working-directory: cypress-realworld-app
 
-    - name: Build and Start Project Cypress RealWorld App
-      run: yarn run dev &
-      working-directory: cypress-realworld-app
-
-    - name: Wait for Port 3000 to be Available
-      run: |
-        while ! nc -z localhost 3000; do
-          sleep 1
-        done
-
     - name: Install Install deps
       run: yarn install
 
     - name: Update Chrome
       run: sudo apt-get update && sudo apt-get --only-upgrade install google-chrome-stable
+
+    - name: Build and Start Project Cypress RealWorld App
+      run: yarn run dev &
+      working-directory: cypress-realworld-app
+  
+    - name: Wait for Port 3000 to be Available
+      run: |
+        while ! nc -z localhost 3000; do
+          sleep 1
+        done
 
     - name : Run tests
       run: yarn run test
