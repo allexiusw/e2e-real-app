@@ -25,7 +25,7 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
-        cache: 'npm'
+        cache: 'yarn'
     
     - name: Clone Cypress RealWorld App
       run: git clone https://github.com/cypress-io/cypress-realworld-app
