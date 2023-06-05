@@ -42,10 +42,8 @@ jobs:
         curl -sLO https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh
         chmod +x wait-for-it.sh
         yarn run start & ./wait-for-it.sh localhost:3000 -t 60 -- echo "App is running!"
+        cd ../ && yarn run test
       working-directory: cypress-realworld-app
-
-    - name: Run my custom tests
-      run: yarn run test
 
     - name: Download the build folders
       if: ${{ failure() }}  # Run the step only if there was a failure
