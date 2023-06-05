@@ -15,8 +15,6 @@ jobs:
         with:
           # we have already installed all dependencies above
           install: false
-          # Cypress tests and config file are in "e2e" folder
-          working-directory: cypress/e2e
 
       - name: Download the build folders
         if: ${{ failure() }}  # Run the step only if there was a failure
