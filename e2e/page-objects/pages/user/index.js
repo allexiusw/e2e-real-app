@@ -2,7 +2,7 @@ export class User {
 
     constructor(){
         this.elements = {
-            goToUrl: () => cy.visit('http://localhost:3000/'),
+            goToUrl: () => cy.visit('/'),
             getUsernameInput: () =>  cy.get('#username').clear(),
             getPasswordInput: () => cy.get('#password').clear(),
             getLoginBtn: () => cy.get('.MuiButton-label'),
