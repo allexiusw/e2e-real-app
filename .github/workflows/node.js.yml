@@ -35,12 +35,8 @@ jobs:
     - name: Install Install deps
       run: yarn install
 
-    - name: Build and Start Project Cypress RealWorld App
-      run: |
-        curl -sLO https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh &&
-        chmod +x wait-for-it.sh &&
-        ./wait-for-it.sh 127.0.0.1:3000 -t 60 -- echo "App is running!" &&
-        yarn run test
+    - name: Run tests
+      run: yarn run test
 
     - name: Download the build folders
       if: ${{ failure() }}  # Run the step only if there was a failure
