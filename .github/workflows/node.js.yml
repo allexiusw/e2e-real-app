@@ -5,7 +5,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
-      
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16.16.0
+  
       - name: Install dependencies cypress
         uses: cypress-io/github-action@v5
         with:
