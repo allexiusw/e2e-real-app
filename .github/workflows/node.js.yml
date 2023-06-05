@@ -27,12 +27,10 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'yarn'
 
-    - name: Clone Cypress RealWorld App
-      run: git clone https://github.com/cypress-io/cypress-realworld-app
-
-    - name: Install Dependencies Cypress RealWorld App
-      run: yarn install
-      working-directory: cypress-realworld-app
+    - name: Install dependencies
+      uses: cypress-io/github-action@v5
+      with:
+        runTests: false
 
     - name: Install Install deps
       run: yarn install
@@ -41,9 +39,8 @@ jobs:
       run: |
         curl -sLO https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh &&
         chmod +x wait-for-it.sh &&
-        yarn run start & ./wait-for-it.sh 127.0.0.1:3000 -t 60 -- echo "App is running!" &&
-        cd ../ && yarn run test
-      working-directory: cypress-realworld-app
+        ./wait-for-it.sh 127.0.0.1:3000 -t 60 -- echo "App is running!" &&
+        yarn run test
 
     - name: Download the build folders
       if: ${{ failure() }}  # Run the step only if there was a failure
