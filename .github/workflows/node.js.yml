@@ -22,7 +22,10 @@ jobs:
         working-directory: cypress-realworld-app
       
       - name: Run Cypress RealWorld App
-        run: yarn start & yarn wait-on http://localhost:3000
+        run: |
+          yarn start &
+          while ! nc -z localhost 3000; do sleep 1; done
+          echo "Cypress RealWorld App is up and running"
         working-directory: cypress-realworld-app
 
       - name: Setup tmate session
