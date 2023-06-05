@@ -41,7 +41,7 @@ jobs:
       run: |
         curl -sLO https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh
         chmod +x wait-for-it.sh
-        yarn run start & ./wait-for-it.sh localhost:3000 -t 60 -- echo "App is running!"
+        yarn run start & ./wait-for-it.sh 127.0.0.1:3000 -t 60 -- echo "App is running!"
         cd ../ && yarn run test
       working-directory: cypress-realworld-app
 
