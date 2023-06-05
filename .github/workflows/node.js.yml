@@ -1,46 +1,27 @@
-# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
-
-name: Node.js CI
-
-on:
-  push:
-    branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
-
+name: E2E
+on: push
 jobs:
-  build:
-
+  test:
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [16.16.0]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
     steps:
-    - uses: actions/checkout@v3
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'yarn'
+      - uses: actions/checkout@master
+      - name: Install dependencies
+        uses: cypress-io/github-action@v5
+        with:
+          # just perform install
+          runTests: false
+      - run: yarn lint
+      - name: Run e2e tests
+        uses: cypress-io/github-action@v5
+        with:
+          # we have already installed all dependencies above
+          install: false
+          # Cypress tests and config file are in "e2e" folder
+          working-directory: cypress/e2e
 
-    - name: Install dependencies
-      uses: cypress-io/github-action@v5
-      with:
-        runTests: false
-
-    - name: Install Install deps
-      run: yarn install
-
-    - name: Run tests
-      run: yarn run test
-
-    - name: Download the build folders
-      if: ${{ failure() }}  # Run the step only if there was a failure
-      uses: actions/upload-artifact@v2
-      with:
-        name: cypress-videos
-        path: cypress/videos
+      - name: Download the build folders
+        if: ${{ failure() }}  # Run the step only if there was a failure
+        uses: actions/upload-artifact@v2
+        with:
+          name: cypress-videos
+          path: cypress/videos
