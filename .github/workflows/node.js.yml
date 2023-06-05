@@ -14,6 +14,17 @@ jobs:
       
       - run: yarn lint
 
+      - name: Clone Cypress RealWorld App
+        run: git clone https://github.com/cypress-io/cypress-realworld-app
+
+      - name: Install Dependencies Cypress RealWorld App
+        run: yarn install
+        working-directory: cypress-realworld-app
+      
+      - name: Run Cypress RealWorld App
+        run: yarn start & yarn wait-on http://localhost:3000
+        working-directory: cypress-realworld-app
+
       - name: Setup tmate session
         uses: mxschmitt/action-tmate@v3
 
