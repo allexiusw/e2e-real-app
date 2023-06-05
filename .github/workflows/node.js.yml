@@ -3,6 +3,9 @@ on: push
 jobs:
   test:
     runs-on: ubuntu-latest
+    env:
+      ACTIONS_RUNNER_DEBUG: false
+
     steps:
       - uses: actions/checkout@master
 
@@ -32,15 +35,16 @@ jobs:
           echo "Cypress RealWorld App is up and running"
         working-directory: cypress-realworld-app
 
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
-
       - name: Run e2e tests
         uses: cypress-io/github-action@v5
         with:
           # we have already installed all dependencies above
           install: false
           working-directory: e2e
+
+      - name: Setup tmate session for debugging
+        if: ${{ failure() && env.ACTIONS_RUNNER_DEBUG == 'true' }}
+        uses: mxschmitt/action-tmate@v3
 
       - name: Download the build folders
         if: ${{ failure() }}  # Run the step only if there was a failure
