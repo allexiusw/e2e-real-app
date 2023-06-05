@@ -41,7 +41,7 @@ jobs:
       run: sudo apt-get update && sudo apt-get --only-upgrade install google-chrome-stable
 
     - name: Build and Start Project Cypress RealWorld App
-      run: yarn run dev &
+      run: yarn run start &
       working-directory: cypress-realworld-app
 
     - name: Wait for App to Start
