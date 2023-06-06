@@ -48,7 +48,7 @@ jobs:
         if: ${{ failure() && env.ACTIONS_RUNNER_DEBUG == 'true' }}
         uses: mxschmitt/action-tmate@v3
 
-      - name: Download the build folders
+      - name: Upload the videos to inspect failures
         if: ${{ failure() }}  # Run the step only if there was a failure
         uses: actions/upload-artifact@v2
         with:
