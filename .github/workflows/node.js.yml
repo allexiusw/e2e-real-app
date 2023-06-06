@@ -1,7 +1,7 @@
 name: E2E
 on: push
 env:
-  ACTIONS_RUNNER_DEBUG: true
+  ACTIONS_RUNNER_DEBUG: false
   URL: http://localhost:3000/
   MATCH: 'Cypress Real World App'
 jobs:
