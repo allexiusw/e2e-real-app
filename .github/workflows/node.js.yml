@@ -1,7 +1,7 @@
 name: E2E
 on: push
 env:
-  ACTIONS_RUNNER_DEBUG: true
+  ACTIONS_RUNNER_DEBUG: false
 jobs:
   test:
     runs-on: ubuntu-latest
