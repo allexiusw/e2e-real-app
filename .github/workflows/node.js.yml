@@ -30,10 +30,10 @@ jobs:
 
       - name: Run Cypress RealWorld App
         run: |
-          yarn dev &
+          yarn run dev &
           while ! nc -z localhost 3000; do sleep 1; done
           echo "Cypress RealWorld App is up and running"
-          sleep 5;
+          sleep 30;
         working-directory: cypress-realworld-app
 
       - name: Run e2e tests
