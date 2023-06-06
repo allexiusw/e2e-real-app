@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "cypress run --project e2e",
-    "lint": "prettier --write 'e2e/**/*.js'"
+    "lint": "prettier e2e -c",
+    "lint-fix": "prettier --write 'e2e/**/*.js'"
   },
   "keywords": [
     "automation",
