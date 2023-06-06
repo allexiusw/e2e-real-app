@@ -3,7 +3,7 @@ on: push
 env:
   ACTIONS_RUNNER_DEBUG: true
   URL: http://localhost:3000/
-  MATCH: Cypress Real World App
+  MATCH: 'Cypress Real World App'
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -33,7 +33,7 @@ jobs:
       - name: Run Cypress RealWorld App
         run: |
           yarn run dev &
-          while ! wget -qO-  ${{ env.URL }} | grep ${{ env.MATCH }} ; do sleep 1; done
+          while ! wget -qO-  ${{ env.URL }} | grep '${{ env.MATCH }}' ; do sleep 1; done
           echo "Cypress RealWorld App is up and running"
         working-directory: cypress-realworld-app
 
