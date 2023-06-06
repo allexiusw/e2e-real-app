@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "e2e": "cypress open",
-    "test": "cypress run"
+    "test": "cypress run --project e2e",
+    "lint": "prettier e2e -c",
+    "lint-fix": "prettier --write 'e2e/**/*.js'"
   },
   "keywords": [
     "automation",
@@ -14,6 +15,7 @@
   "author": "Allexiusw",
   "license": "ISC",
   "dependencies": {
-    "cypress": "^12.13.0"
+    "cypress": "^12.13.0",
+    "prettier": "2.8.8"
   }
 }

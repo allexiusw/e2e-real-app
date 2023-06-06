@@ -1,0 +1,56 @@
+name: E2E
+on: push
+env:
+  ACTIONS_RUNNER_DEBUG: false
+  URL: http://localhost:3000/
+  MATCH: 'Cypress Real World App'
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@master
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16.16.0
+  
+      - name: Install dependencies cypress
+        uses: cypress-io/github-action@v5
+        with:
+          # just perform install
+          runTests: false
+
+      - run: yarn lint
+
+      - name: Clone Cypress RealWorld App
+        run: git clone https://github.com/cypress-io/cypress-realworld-app
+
+      - name: Install Dependencies Cypress RealWorld App
+        run: yarn install
+        working-directory: cypress-realworld-app
+
+      - name: Run Cypress RealWorld App
+        run: |
+          yarn run dev &
+          while ! wget -qO-  ${{ env.URL }} | grep '${{ env.MATCH }}' ; do sleep 1; done
+          echo "Cypress RealWorld App is up and running"
+        working-directory: cypress-realworld-app
+
+      - name: Run e2e tests
+        uses: cypress-io/github-action@v5
+        with:
+          # we have already installed all dependencies above
+          install: false
+          working-directory: e2e
+
+      - name: Setup tmate session for debugging
+        if: ${{ failure() && env.ACTIONS_RUNNER_DEBUG == 'true' }}
+        uses: mxschmitt/action-tmate@v3
+
+      - name: Upload the videos to inspect failures
+        if: ${{ failure() }}  # Run the step only if there was a failure
+        uses: actions/upload-artifact@v2
+        with:
+          name: cypress-videos
+          path: videos
