@@ -2,6 +2,8 @@ name: E2E
 on: push
 env:
   ACTIONS_RUNNER_DEBUG: false
+  URL: http://localhost:3000/
+  MATCH: Cypress Real World App
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -31,9 +33,8 @@ jobs:
       - name: Run Cypress RealWorld App
         run: |
           yarn run dev &
-          while ! nc -z localhost 3000; do sleep 1; done
+          while ! wget -qO-  ${{ env.URL }} | grep ${{ env.MATCH }} ; do sleep 1; done
           echo "Cypress RealWorld App is up and running"
-          sleep 30;
         working-directory: cypress-realworld-app
 
       - name: Run e2e tests
