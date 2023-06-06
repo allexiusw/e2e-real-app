@@ -1,10 +1,10 @@
 name: E2E
 on: push
+env:
+  ACTIONS_RUNNER_DEBUG: true
 jobs:
   test:
     runs-on: ubuntu-latest
-    env:
-      ACTIONS_RUNNER_DEBUG: false
 
     steps:
       - uses: actions/checkout@master
@@ -18,7 +18,7 @@ jobs:
         with:
           # just perform install
           runTests: false
-      
+
       - run: yarn lint
 
       - name: Clone Cypress RealWorld App
@@ -27,7 +27,7 @@ jobs:
       - name: Install Dependencies Cypress RealWorld App
         run: yarn install
         working-directory: cypress-realworld-app
-      
+
       - name: Run Cypress RealWorld App
         run: |
           yarn dev &
